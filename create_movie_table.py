@@ -1,5 +1,5 @@
-from data.db import Base, engine
-from data.Models.movies import Movie
+from sql_data.db import Base, engine
+from sql_data.Models.movies import *
 
 
 def main():

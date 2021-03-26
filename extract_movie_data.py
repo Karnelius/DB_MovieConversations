@@ -1,10 +1,9 @@
-from data.Repo.movie_repo import store_movies
+from mongo_data.Repo.movie_repo import store_movies
 
 
-def main():
+def extractdata():
     with open('./raw_data/movie_titles_metadata.txt') as movie_data:
         lines = []
-        genres = set()
         for line in movie_data:
             line = line.strip()
             line_data = line.split(' +++$+++ ')
@@ -16,12 +15,17 @@ def main():
                 'IMDB_votes': int(line_data[4]),
                 'genres': line_data[5][1:-2].replace("'", "").split(', ')
             }
-            for genre in line_dict['genres']:
-                genres.add(genre)
+
             lines.append(line_dict)
 
     store_movies(lines)
-#DELETE FROM movies where movie_id != 'q99';
+    #store_moves(lines) från SQL om vi vill använda SQL
+    #DELETE FROM movies where movie_id != 'q99';
+
+def main():
+    extractdata()
 
 if __name__ == '__main__':
     main()
+
+
